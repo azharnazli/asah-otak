@@ -1,6 +1,7 @@
 const routes = require('express').Router()
 const Multer = require('multer');
 const gcsMiddlewares = require('../../middlewares/google-cloud-storage')
+const UserController = require('../../controllers/UserController')
 const User = require('../../models/user')  
   const multer = Multer({
     storage: Multer.MemoryStorage,
@@ -12,26 +13,7 @@ const User = require('../../models/user')
   routes.post(
     '/upload',
     multer.single('image'),
-    gcsMiddlewares.sendUploadToGCS,
-    (req, res, next) => {
-      if (req.file && req.file.gcsUrl) {
-        console.log(req.file.gcsUrl)
-       return User.findByIdAndUpdate({
-          _id : req.headers.id
-        },{
-          gcsLink: req.file.gcsUrl
-        },{
-          new : true
-        })
-        .then((user => {
-          res.status(200).json(user)
-        }))
-        .catch(err => {
-          res.status(500).json(err)
-        })
-      }
-      return res.status(500).send('Unable to upload');
-    },
+    gcsMiddlewares.sendUploadToGCS, UserController.uploadImage
   );
 
 module.exports = routes

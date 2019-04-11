@@ -2,7 +2,6 @@ const User = require('../models/user')
 const axios = require('axios')
 
 class UserController{
-  
   static createUser(req, res) {
     User.create(req.body)
       .then((user)=> {
@@ -14,11 +13,12 @@ class UserController{
   }
 
   static uploadImage(req, res) {
-    console.log('masuk')
-    User.findById({
+    User.findByIdAndUpdate({
       _id : req.headers.id
     },{
       gcsLink : req.file.gcsUrl
+    },{
+      new : true
     })
       .then(user => {
         res.status(200).json(user)
