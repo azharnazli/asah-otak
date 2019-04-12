@@ -167,9 +167,6 @@
       </div>
     </div>
     <div>
-
-
-
       <div class="main main-raised" v-if="isLoggedIn">
         <div v-if="currentPage == 'edit'">
         <div class="section section-basic">
@@ -293,12 +290,19 @@
               <button class="btn btn-lg btn-primary btn-block" type="submit">Generate API URL</button>
             </form>
           </div>
-          <div class="container" v-if="!isLoggedIn">
-            <!-- div questions -->
+          <!-- div questions -->
+          <div class="container" v-if="!isLoggedIn" style="padding: 40px;">
+            <div v-show="score2">
+              <img v-bind:src="score" >
+              <a href="javascript:fbshareCurrentPage()" target="_blank" alt="Share on Facebook"><img
+                  src="https://assets.cobaltnitra.com/teams/repository/export/685/994e08a161005809f00505692530e/685994e08a161005809f00505692530e.png"
+                  style="width: 30px;" alt="" /></a>
+            </div>
             <div class="title">
               <h2>Questions</h2>
             </div>
-            <div></div>
+            <questionscomponent v-on:submit-questions="submission" :questions="questions" v-show=""></questionscomponent>
+            <!-- v-on:done="...." -->
           </div>
         </div>
       </div>
@@ -342,11 +346,10 @@
     </div>
   </footer>
   <!--   Core JS Files   -->
-  <script src="./assets/js/main.js"></script>
   <script src="./assets/js/questions.js"></script>
+  <script src="./assets/js/main.js"></script>
   <script language="javascript">
-      function fbshareCurrentPage()
-      {window.open("https://www.facebook.com/sharer/sharer.php?u="+escape('azharnazli.com'), '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false; }
+    function fbshareCurrentPage() { window.open("https://www.facebook.com/sharer/sharer.php?u=" + escape(window.location.href) + "&t=" + document.title, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600'); return false; }
   </script>
 </body>
 
