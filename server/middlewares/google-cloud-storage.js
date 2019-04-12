@@ -1,4 +1,4 @@
-const Storage = require('../helpers/google-cloud-storage').storage
+const storage = require('../helpers/google-cloud-storage').storage
 const gcsHelpers = require('../helpers/google-cloud-storage')
 
 
@@ -16,7 +16,7 @@ const gcsHelpers = require('../helpers/google-cloud-storage')
       return next();
     }  
     const bucketName = req.body.bucketName || DEFAULT_BUCKET_NAME;
-    const bucket = Storage.bucket(bucketName);
+    const bucket = storage.bucket(bucketName);
     const gcsFileName = `${Date.now()}-${req.file.originalname}`;
     const file = bucket.file(gcsFileName);
   
