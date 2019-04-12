@@ -35,6 +35,7 @@ Vue.component('questionscomponent', {
       <br>
     </div>
     <button class="btn btn-primary" type="submit" >Submit</button>
+    <button class="btn btn-warning float-right" type="submit" v-on:click.prevent="currentPage = ''" >Back</button>
   </form>
   `
 })

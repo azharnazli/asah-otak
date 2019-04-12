@@ -83,11 +83,14 @@ let app = new Vue({
       // console.log(ans)
       ans = Object.values(ans)
       let betul = 0
+
       for(let i = 0; i < ans.length; i++) {
         if(ans[i] === this.correctAnswers[i]) {
           betul+=10
         }
       }
+
+      if(betul == 0) betul = `Nol Cuy`
       // console.log(`betul ${betul}`)
       let url = `https://dummyimage.com/600x400/000000/fff&text=${betul}`
       this.score = url
